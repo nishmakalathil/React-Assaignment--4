@@ -12,8 +12,10 @@ function Todo() {
     setInputTask(e.target.value);
   };
 
+  const API_URL = "https://todo-backend-wltj.vercel.app";
+
   const getTask = () => {
-    axios.get("http://localhost:3000")
+    axios.get(`${API_URL}/`)
       .then(res => {
         setTasks(res.data); 
       })
@@ -34,7 +36,7 @@ function Todo() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (editTaskId !== null) {
-      axios.put(`http://localhost:3000/task/${editTaskId}`, { task: inputTask })
+      axios.put(`${API_URL}/task/${editTaskId}`, { task: inputTask })
         .then(res => {
           setInputTask("");  
           setEditTaskId(null);  
@@ -44,7 +46,7 @@ function Todo() {
           console.log("error", error);
         });
     } else {
-      axios.post("http://localhost:3000", { task: inputTask })
+      axios.post(`${API_URL}/`, { task: inputTask })
         .then(res => {
           setInputTask("");  
           getTask();  
@@ -56,7 +58,7 @@ function Todo() {
   };
 
   const deleteTask = (index) => {
-    axios.delete(`http://localhost:3000/task/${index}`)
+    axios.delete(`${API_URL}/task/${index}`)
       .then(res => {
         getTask();  
       })
