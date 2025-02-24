@@ -2,17 +2,10 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const PORT =process.env.PORT || 3000;
 
 app.use(cors({ origin: "https://react-assaignment-4.vercel.app/"}));
 
-
-
-
 app.use(express.json());
-
-
-
 let tasks = [
   { id: 1, task: "Go to office" },
   { id: 2, task: "Go to Mall" },
@@ -23,8 +16,6 @@ let tasks = [
 app.get("/test", (req, res) => {
   res.json({ message: "API is working!" });
 });
-
-
 
 
 app.get("/", (req, res) => {
@@ -41,7 +32,6 @@ app.post("/", (req, res) => {
 
   res.send("success");
 });
-
 
 
 app.put("/task/:id", (req, res) => {
@@ -66,10 +56,6 @@ app.put("/task/:id", (req, res) => {
 });
 
 
-
-
-
-
 app.delete("/task/:index", (req, res) => {
   const index = parseInt(req.params.index, 10); 
   if (index >= 0 && index < tasks.length) {
@@ -80,6 +66,9 @@ app.delete("/task/:index", (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
