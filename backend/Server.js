@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const PORT =process.env.PORT || 3000;
 
-app.use(cors({ origin: "http://localhost:5179"}));
+app.use(cors({ origin: "https://react-assaignment-4.vercel.app/"}));
 
 
 
