@@ -12,7 +12,7 @@ function Todo() {
     setInputTask(e.target.value);
   };
 
-  const API_URL = "https://todo-backend-wltj.vercel.app";
+  const API_URL = "http://localhost:3000";
 
   const getTask = () => {
     axios.get(`${API_URL}/`)

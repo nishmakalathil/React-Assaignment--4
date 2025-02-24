@@ -9,7 +9,7 @@ const PORT =process.env.PORT || 3000;
 
 
 app.use(cors({
-  origin: ["http://localhost:5174","https://todo-frontend-six-tau.vercel.app"],  // This allows requests from your frontend (localhost:5301)
+  origin: ["http://localhost:5175","https://todo-frontend-six-tau.vercel.app"],  // This allows requests from your frontend (localhost:5301)
   methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
   credentials: true,  // Allow cookies to be sent with requests
   
