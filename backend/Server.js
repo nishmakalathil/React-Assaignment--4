@@ -2,10 +2,12 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
+const PORT =process.env.PORT || 3000;
 
-
-app.use(cors({ origin: "http://localhost:5174"}));
+app.use(cors({ origin: "http://localhost:5176"}));
 app.use(express.json());
+
+
 
 let tasks = [
   { id: 1, task: "Go to office" },
