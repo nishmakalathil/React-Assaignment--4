@@ -1,19 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 
 const app = express();
 const PORT =process.env.PORT || 3000;
 
+app.use(cors({ origin: "http://localhost:5179"}));
 
 
-
-app.use(cors({
-  origin: ["http://localhost:5178","https://todo-frontend-six-tau.vercel.app"],  // This allows requests from your frontend (localhost:5301)
-  methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
-  credentials: true,  // Allow cookies to be sent with requests
-  
-}));
 
 
 app.use(express.json());

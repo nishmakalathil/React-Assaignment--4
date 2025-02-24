@@ -12,10 +12,10 @@ function Todo() {
     setInputTask(e.target.value);
   };
 
-  const API_URL = "http://localhost:3000";
+  
 
   const getTask = () => {
-    axios.get(`${API_URL}/`)
+    axios.get("http://localhost:3000")
       .then(res => {
         setTasks(res.data); 
       })
@@ -36,7 +36,7 @@ function Todo() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (editTaskId !== null) {
-      axios.put(`${API_URL}/task/${editTaskId}`, { task: inputTask })
+      axios.put(`http://localhost:3000/task/${editTaskId}`, { task: inputTask })
         .then(res => {
           setInputTask("");  
           setEditTaskId(null);  
@@ -46,7 +46,7 @@ function Todo() {
           console.log("error", error);
         });
     } else {
-      axios.post(`${API_URL}/`, { task: inputTask })
+      axios.post("http://localhost:3000", { task: inputTask })
         .then(res => {
           setInputTask("");  
           getTask();  
@@ -58,7 +58,7 @@ function Todo() {
   };
 
   const deleteTask = (index) => {
-    axios.delete(`${API_URL}/task/${index}`)
+    axios.delete(`http://localhost:3000/task/${index}`)
       .then(res => {
         getTask();  
       })
