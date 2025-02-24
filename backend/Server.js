@@ -3,7 +3,19 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({ origin: "https://react-assaignment-4.vercel.app"}));
+// ✅ Allow only your Vercel frontend
+const allowedOrigin = 'https://react-assaignment-4.vercel.app';
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || origin === allowedOrigin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 app.use(express.json());
 let tasks = [
