@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 
 
-app.use(cors({ origin: "http://localhost:5173"}));
+app.use(cors({ origin: "http://localhost:5174"}));
 app.use(express.json());
 
 let tasks = [
@@ -12,6 +12,14 @@ let tasks = [
   { id: 2, task: "Go to Mall" },
   { id: 3, task: "Go to Market" }
 ];
+
+// Example API Route
+app.get("/test", (req, res) => {
+  res.json({ message: "API is working!" });
+});
+
+
+
 
 app.get("/", (req, res) => {
   res.json(tasks);
