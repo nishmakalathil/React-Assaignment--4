@@ -12,10 +12,8 @@ function Todo() {
     setInputTask(e.target.value);
   };
 
-  
-
   const getTask = () => {
-    axios.get("https://todo-backend-tbkf.onrender.com")
+    axios.get("http://localhost:3000/")
       .then(res => {
         setTasks(res.data); 
       })
@@ -36,7 +34,7 @@ function Todo() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (editTaskId !== null) {
-      axios.put(`https://todo-backend-tbkf.onrender.com/task/${editTaskId}`, { task: inputTask })
+      axios.put(`http://localhost:3000/task/${editTaskId}`, { task: inputTask })
         .then(res => {
           setInputTask("");  
           setEditTaskId(null);  
@@ -46,7 +44,7 @@ function Todo() {
           console.log("error", error);
         });
     } else {
-      axios.post("https://todo-backend-tbkf.onrender.com", { task: inputTask })
+      axios.post("http://localhost:3000/", { task: inputTask })
         .then(res => {
           setInputTask("");  
           getTask();  
@@ -58,7 +56,7 @@ function Todo() {
   };
 
   const deleteTask = (index) => {
-    axios.delete(`https://todo-backend-tbkf.onrender.com/task/${index}`)
+    axios.delete(`http://localhost:3000/task/${index}`)
       .then(res => {
         getTask();  
       })
@@ -106,4 +104,3 @@ function Todo() {
 }
 
 export default Todo;
-

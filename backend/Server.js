@@ -3,28 +3,21 @@ const cors = require('cors');
 
 const app = express();
 
-// ✅ Allow only your Vercel frontend
-const allowedOrigin = 'https://react-assaignment-4.vercel.app';
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || origin === allowedOrigin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: "http://localhost:5175", 
   credentials: true
 }));
 
 app.use(express.json());
+
 let tasks = [
   { id: 1, task: "Go to office" },
   { id: 2, task: "Go to Mall" },
   { id: 3, task: "Go to Market" }
 ];
 
-// Example API Route
+
 app.get("/test", (req, res) => {
   res.json({ message: "API is working!" });
 });
@@ -34,23 +27,22 @@ app.get("/", (req, res) => {
   res.json(tasks);
 });
 
+
 app.post("/", (req, res) => {
   const newTask = {
-    id: tasks.length + 1,  
+    id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,  
     task: req.body.task    
   };
 
   tasks.push(newTask);
-
-  res.send("success");
+  res.status(201).json({ message: "Task added successfully", task: newTask });
 });
 
 
 app.put("/task/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10); 
-  const updatedTask = req.body.task; 
+  const id = parseInt(req.params.id, 10);
+  const updatedTask = req.body.task;
 
-  
   let taskFound = false;
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id === id) {
@@ -61,25 +53,25 @@ app.put("/task/:id", (req, res) => {
   }
 
   if (taskFound) {
-    res.send("Task updated successfully");
+    res.json({ message: "Task updated successfully" });
   } else {
-    res.status(404).send("Task not found");
+    res.status(404).json({ error: "Task not found" });
   }
 });
 
 
-app.delete("/task/:index", (req, res) => {
-  const index = parseInt(req.params.index, 10); 
-  if (index >= 0 && index < tasks.length) {
+app.delete("/task/:id", (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const index = tasks.findIndex(task => task.id === id);
+
+  if (index !== -1) {
     tasks.splice(index, 1);
-    res.send("deleted");
+    res.json({ message: "Task deleted successfully" });
   } else {
-    res.status(404).send("Task not found");
+    res.status(404).json({ error: "Task not found" });
   }
 });
 
-
-// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
