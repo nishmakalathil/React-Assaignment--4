@@ -3,7 +3,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({ origin: "https://react-assaignment-4.vercel.app/"}));
+app.use(cors({ origin: "https://react-assaignment-4.vercel.app"}));
 
 app.use(express.json());
 let tasks = [

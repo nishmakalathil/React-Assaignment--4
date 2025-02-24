@@ -15,7 +15,7 @@ function Todo() {
   
 
   const getTask = () => {
-    axios.get("https://todo-backend-tbkf.onrender.com/")
+    axios.get("https://todo-backend-tbkf.onrender.com")
       .then(res => {
         setTasks(res.data); 
       })
@@ -46,7 +46,7 @@ function Todo() {
           console.log("error", error);
         });
     } else {
-      axios.post("https://todo-backend-tbkf.onrender.com/", { task: inputTask })
+      axios.post("https://todo-backend-tbkf.onrender.com", { task: inputTask })
         .then(res => {
           setInputTask("");  
           getTask();  
